@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1, shrink-to-fit=no">
+	<title>User presence detection</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="styles.css" rel="stylesheet">
+</head>
+ 
+<body>
+	<div class="container backgroundColor2">
+		<div class="row bg-light p-2">
+			<div class="col bg-light">
+				<nav id="navigation">
+					<ul class="nav">
+						<li class="nav-item"><a class="nav-link" href="#navigation">Home</a></li>
+						<li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+						<li class="nav-item"><a class="nav-link" href="#methods">Methods</a></li>
+					</ul> 
+				</nav>
+			</div>
+		</div>
+
+		<div class="row backgroundColor1 p-3 justify-content-center">
+			<div class="col-lg-8 justify-content-center">
+				<div id="videoContainer">
+					<video autoplay="true" id="videoElement"></video>
+					<canvas id="faceCanvas" width="600" height="450"></canvas>
+				</div>
+			</div>
+			<div class="col-lg-2 my-auto text-center">
+				<h5>Face Detection</h5>
+				<div id="faceIndicatorWrapper" class="pb-3">
+					<svg height="20" width="20">
+						<circle id="faceIndicator" cx="10" cy="10" r="10" fill="red" />
+					</svg> 
+				</div>
+		
+				<h5>Movement 1</h5>
+				<div id="changePercentage">0</div>
+				<div id="indicator1Wrapper" class="pb-3">
+					<svg height="20" width="20">
+						<circle id="indicator1" cx="10" cy="10" r="10" fill="red" />
+					</svg> 
+				</div>
+				<h5>Movement 2</h5>
+				<div id="averageColorChange">0</div>
+				<div id="indicator2Wrapper" class="pb-3">
+					<svg height="20" width="20">
+						<circle id="indicator2" cx="10" cy="10" r="10" fill="red" />
+					</svg> 
+				</div>
+				<h5>Movement 3</h5>
+				<div id="pixelChange">0</div>
+				<div id="indicator3Wrapper">
+					<svg height="20" width="20">
+						<circle id="indicator3" cx="10" cy="10" r="10" fill="red" />
+					</svg> 
+				</div>
+			</div>
+		</div>
+
+		<div class="row p-2">
+			<div class="col text-center">
+				<h2 id="about">About</h2>
+				<p>The aim of this project is to implement JavaScript application capable of face detection and movement detection<br> by 3 different approaches.</p>
+			</div>
+		</div>
+
+		<div class="row border bg-light m-4">
+			<div class="p-2 text-center">
+				<h3 id="methods">Method 1</h3>
+				<h5>(Change of pixels between frames - %)</h5>
+				<p>The first method determines the presence of user based on the pixel difference between two consecutive frames.</p>
+				<p>It calculates the percentage of changed pixels between two frames within some interval. If the change is significantly higher, than it is evaluated as motion.</p>
+			</div>
+		</div>
+		<div class="row border bg-light m-4">
+			<div class="p-2 text-center">
+				<h3>Method 2</h3>
+				<h5>(Average change of pixel color between frames - RGB points)</h5>
+				<p>The second method determines the presence of user based on the average change in color between two consecutive frames.</p>
+				<p>The color change is measured in RGB difference between pixels. If the average change exceeds given constant, it is evaluated as motion. The constant can be changed for better accuracy.</p>
+			</div>
+		</div>
+		<div class="row border bg-light m-4">
+			<div class="p-2 text-center">
+				<h3>Method 3</h3>
+				<h5>(Number of pixels that 'moved')</h5>
+				<p>Third method diffs two consecutive frames to see pixels which are not the same. When the number of changed pixels is significantly higher, it is evaluated as motion.</p>
+				<h6>Diff camera:</h6>
+				<div class="row justify-content-center">
+					<div class="col-6 col-offset-3 d-flex justify-content-center">
+						<canvas id="diffCanvas" width="600" height="450"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row border bg-light m-4">
+			<div class="p-2 text-center">
+				<h3>Face detection</h3>
+				<p>The implementation of face detection from the video stream is made using face-api.js library. It uses library functions to recognise face atributes in video.</p>
+			</div>
+		</div>
+
+		<div class="row backgroundColor1 p-2 mt-3">
+		</div>
+	</div>
+	<script src="face-api.min.js"></script>
+	<script src="script.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
